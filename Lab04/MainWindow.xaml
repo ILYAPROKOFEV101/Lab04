@@ -6,7 +6,65 @@
         xmlns:local="clr-namespace:Lab04"
         mc:Ignorable="d"
         Title="MainWindow" Height="350" Width="525">
-    <Grid>
+    <DockPanel>
+        <!-- Меню -->
+        <Menu DockPanel.Dock="Top">
+            <MenuItem Header="Файл">
+                <MenuItem Header="Изменить цвет фона" Click="ChangeBackgroundColor_Click"
+                          ToolTip="Изменить цвет фона окна"/>
+                <MenuItem Header="О программе" Click="AboutDeveloper_Click"
+                          ToolTip="Информация о разработчике"/>
+                <Separator/>
+                <MenuItem Header="Выход" Click="ExitApplication_Click"
+                          ToolTip="Закрыть приложение"/>
+            </MenuItem>
+        </Menu>
+
+        <!-- Панель инструментов -->
+        <ToolBarTray DockPanel.Dock="Top">
+            <ToolBar>
+                <Button Content="Цвет фона" Click="ChangeBackgroundColor_Click"
+                        ToolTip="Изменить цвет фона окна"/>
+                <Button Content="О программе" Click="AboutDeveloper_Click"
+                        ToolTip="Информация о разработчике"/>
+                <Button Content="Выход" Click="ExitApplication_Click"
+                        ToolTip="Закрыть приложение"/>
+            </ToolBar>
+        </ToolBarTray>
+
+        <!-- Панель настроек графического редактора -->
+        <StackPanel Orientation="Horizontal" DockPanel.Dock="Top" Margin="10">
+            <!-- Выбор цвета кисти -->
+            <ComboBox x:Name="BrushColorComboBox" Width="100" Margin="5" SelectionChanged="BrushColorComboBox_SelectionChanged">
+                <ComboBoxItem Content="Черный" Background="Black" Foreground="White" IsSelected="True"/>
+                <ComboBoxItem Content="Красный" Background="Red"/>
+                <ComboBoxItem Content="Синий" Background="Blue"/>
+                <ComboBoxItem Content="Зеленый" Background="Green"/>
+                <ComboBoxItem Content="Желтый" Background="Yellow"/>
+            </ComboBox>
+
+            <!-- Ползунок для выбора размера кисти -->
+            <Slider x:Name="BrushSizeSlider" Minimum="1" Maximum="20" Value="5" Width="150" Margin="5"
+                    ValueChanged="BrushSizeSlider_ValueChanged"/>
+            <TextBlock Text="{Binding ElementName=BrushSizeSlider, Path=Value, StringFormat='Размер кисти: {0}'}" VerticalAlignment="Center"/>
+
+            <!-- Переключатели для выбора режима -->
+            <RadioButton GroupName="Mode" Content="Рисование" IsChecked="True" Margin="10" Checked="ModeRadioButton_Checked"/>
+            <RadioButton GroupName="Mode" Content="Редактирование" Margin="10" Checked="ModeRadioButton_Checked"/>
+            <RadioButton GroupName="Mode" Content="Удаление" Margin="10" Checked="ModeRadioButton_Checked"/>
+        </StackPanel>
+
+        <!-- Строка состояния -->
+        <StatusBar DockPanel.Dock="Bottom">
+            <TextBlock x:Name="StatusText" Text="Готово" />
+        </StatusBar>
+
+        <!-- Основная область для рисования -->
         
-    </Grid>
+        <Canvas x:Name="DrawingCanvas" 
+                Background="White" 
+                MouseDown="DrawingCanvas_MouseDown" 
+                MouseMove="DrawingCanvas_MouseMove" 
+                MouseUp="DrawingCanvas_MouseUp"/>
+    </DockPanel>
 </Window>
