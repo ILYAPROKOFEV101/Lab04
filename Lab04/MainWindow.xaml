@@ -6,6 +6,34 @@
         xmlns:local="clr-namespace:Lab04"
         mc:Ignorable="d"
         Title="MainWindow" Height="350" Width="525">
+    <Window.Resources>
+        <!-- Стили -->
+        <Style x:Key="ButtonStyle" TargetType="Button">
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="Padding" Value="10,5"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="ToolTipService.ShowDuration" Value="5000"/>
+        </Style>
+        <Style x:Key="TextBlockStyle" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+        </Style>
+        <Style x:Key="ComboBoxStyle" TargetType="ComboBox">
+            <Setter Property="Width" Value="100"/>
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="FontSize" Value="12"/>
+        </Style>
+        <Style x:Key="SliderStyle" TargetType="Slider">
+            <Setter Property="Width" Value="150"/>
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="FontSize" Value="12"/>
+        </Style>
+        <Style x:Key="RadioButtonStyle" TargetType="RadioButton">
+            <Setter Property="Margin" Value="10"/>
+            <Setter Property="FontSize" Value="12"/>
+        </Style>
+    </Window.Resources>
     <DockPanel>
         <!-- Меню -->
         <Menu DockPanel.Dock="Top">
@@ -24,18 +52,23 @@
         <ToolBarTray DockPanel.Dock="Top">
             <ToolBar>
                 <Button Content="Цвет фона" Click="ChangeBackgroundColor_Click"
-                        ToolTip="Изменить цвет фона окна"/>
+                        ToolTip="Изменить цвет фона окна"
+                        Style="{StaticResource ButtonStyle}"/>
                 <Button Content="О программе" Click="AboutDeveloper_Click"
-                        ToolTip="Информация о разработчике"/>
+                        ToolTip="Информация о разработчике"
+                        Style="{StaticResource ButtonStyle}"/>
                 <Button Content="Выход" Click="ExitApplication_Click"
-                        ToolTip="Закрыть приложение"/>
+                        ToolTip="Закрыть приложение"
+                        Style="{StaticResource ButtonStyle}"/>
             </ToolBar>
         </ToolBarTray>
 
         <!-- Панель настроек графического редактора -->
         <StackPanel Orientation="Horizontal" DockPanel.Dock="Top" Margin="10">
             <!-- Выбор цвета кисти -->
-            <ComboBox x:Name="BrushColorComboBox" Width="100" Margin="5" SelectionChanged="BrushColorComboBox_SelectionChanged">
+            <ComboBox x:Name="BrushColorComboBox" 
+                      Style="{StaticResource ComboBoxStyle}" 
+                      SelectionChanged="BrushColorComboBox_SelectionChanged">
                 <ComboBoxItem Content="Черный" Background="Black" Foreground="White" IsSelected="True"/>
                 <ComboBoxItem Content="Красный" Background="Red"/>
                 <ComboBoxItem Content="Синий" Background="Blue"/>
@@ -44,23 +77,29 @@
             </ComboBox>
 
             <!-- Ползунок для выбора размера кисти -->
-            <Slider x:Name="BrushSizeSlider" Minimum="1" Maximum="20" Value="5" Width="150" Margin="5"
+            <Slider x:Name="BrushSizeSlider" 
+                    Style="{StaticResource SliderStyle}" 
+                    Minimum="1" Maximum="20" Value="5" 
                     ValueChanged="BrushSizeSlider_ValueChanged"/>
-            <TextBlock Text="{Binding ElementName=BrushSizeSlider, Path=Value, StringFormat='Размер кисти: {0}'}" VerticalAlignment="Center"/>
+            <TextBlock Text="{Binding ElementName=BrushSizeSlider, Path=Value, StringFormat='Размер кисти: {0}'}" 
+                       Style="{StaticResource TextBlockStyle}"/>
 
             <!-- Переключатели для выбора режима -->
-            <RadioButton GroupName="Mode" Content="Рисование" IsChecked="True" Margin="10" Checked="ModeRadioButton_Checked"/>
-            <RadioButton GroupName="Mode" Content="Редактирование" Margin="10" Checked="ModeRadioButton_Checked"/>
-            <RadioButton GroupName="Mode" Content="Удаление" Margin="10" Checked="ModeRadioButton_Checked"/>
+            <RadioButton GroupName="Mode" Content="Рисование" IsChecked="True" 
+                         Style="{StaticResource RadioButtonStyle}" Checked="ModeRadioButton_Checked"/>
+            <RadioButton GroupName="Mode" Content="Редактирование" 
+                         Style="{StaticResource RadioButtonStyle}" Checked="ModeRadioButton_Checked"/>
+            <RadioButton GroupName="Mode" Content="Удаление" 
+                         Style="{StaticResource RadioButtonStyle}" Checked="ModeRadioButton_Checked"/>
         </StackPanel>
 
         <!-- Строка состояния -->
         <StatusBar DockPanel.Dock="Bottom">
-            <TextBlock x:Name="StatusText" Text="Готово" />
+            <TextBlock x:Name="StatusText" Text="Готово" 
+                       Style="{StaticResource TextBlockStyle}"/>
         </StatusBar>
 
         <!-- Основная область для рисования -->
-        
         <Canvas x:Name="DrawingCanvas" 
                 Background="White" 
                 MouseDown="DrawingCanvas_MouseDown" 
