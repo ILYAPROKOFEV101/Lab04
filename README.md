@@ -1,3 +1,9 @@
+я сделал разработанное в 3-ей лабораторной работе: используйте стили для
+однотипных элементов управления. 
+<img width="783" alt="Снимок экрана 2025-04-23 в 10 19 23" src="https://github.com/user-attachments/assets/5be98648-90c7-434c-84bb-6f4e2b71d204" />
+
+
+
 Скриншоты 
 ![image](https://github.com/user-attachments/assets/6b895a28-cf41-4d8c-9987-18c3cc9d06ac)
 ![image](https://github.com/user-attachments/assets/ff8f6c3f-22bd-40a1-b731-3b16f31c869f)
